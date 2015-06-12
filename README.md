@@ -1,3 +1,3 @@
 # Hire-Forms Form
 
-Mixin for creating a HireForm.
+React mixin for creating a HireForm.
