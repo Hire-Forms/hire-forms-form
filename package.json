@@ -16,7 +16,11 @@
     "url": "https://github.com/Hire-Forms/hire-forms-form/issues"
   },
   "homepage": "https://github.com/Hire-Forms/hire-forms-form",
-  "peerDependencies": {
-    "react": "^0.13.3"
+  "dependencies": {
+    "hire-forms-prop-types": "^1.0.0",
+    "hire-forms-utils": "^1.0.0"
+  },
+  "browserify": {
+    "transform": ["babelify"]
   }
 }
