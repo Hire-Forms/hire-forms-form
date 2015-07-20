@@ -29,3 +29,8 @@ Create a component (OriginForm) and wrap it with the higher order component (for
 	}
 
 	export default form(OriginForm);
+
+## Why doesn't HireForms Form use the <form>-tag?
+
+HireForms Form components should be able to be nested. For example when
+using HireForms MultiForm. It is not allowed to nest `<form>`s.
