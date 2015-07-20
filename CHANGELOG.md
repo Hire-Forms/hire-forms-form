@@ -1,3 +1,9 @@
+### v2.0.1	(2015/7/20 17:41)
+* Add custom classname parameter
+* Update README.md
+* Add example to README.md
+* Wrap ComposedComponent in div
+
 ### v2.0.0	(2015/7/17 17:6)
 * Change mixin to higher order component
 
