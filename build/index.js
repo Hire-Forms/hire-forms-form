@@ -116,7 +116,11 @@ exports["default"] = function (ComposedComponent) {
 		}, {
 			key: "render",
 			value: function render() {
-				return _react2["default"].createElement(ComposedComponent, this.props);
+				return _react2["default"].createElement(
+					"div",
+					{ className: "hire-forms-form" },
+					_react2["default"].createElement(ComposedComponent, this.props)
+				);
 			}
 		}]);
 

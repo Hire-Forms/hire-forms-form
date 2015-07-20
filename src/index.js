@@ -24,7 +24,11 @@ export default ComposedComponent => {
 		}
 
 		render() {
-			return <ComposedComponent {...this.props} />;
+			return (
+				<div className="hire-forms-form">
+					<ComposedComponent {...this.props} />
+				</div>
+			);
 		}
 	}
 
