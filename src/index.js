@@ -3,7 +3,7 @@ import React from "react";
 import {stringOrArray} from "hire-forms-prop-types";
 import {castArray} from "hire-forms-utils";
 
-export default ComposedComponent => {
+export default (ComposedComponent, classNames=[]) => {
 	class Form extends React.Component {
 		handleChange(key, value) {
 			let attr = castArray(this.props.attr);
@@ -25,8 +25,12 @@ export default ComposedComponent => {
 
 		render() {
 			return (
-				<div className="hire-forms-form">
-					<ComposedComponent {...this.props} />
+				<div className={"hire-forms-form " + castArray(classNames).join(" ")}>
+					<ComposedComponent
+						{...this.props}
+						handleChange={this.handleChange}
+						handleDelete={this.handleDelete}
+						handleInvalid={this.handleInvalid} />
 				</div>
 			);
 		}
