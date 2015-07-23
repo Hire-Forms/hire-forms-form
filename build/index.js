@@ -11,51 +11,112 @@ var _react = _dereq_("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var elementOrArrayOfElement = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.element, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.element)]);
+var keyValueMap = _react2["default"].PropTypes.shape({
+	key: _react2["default"].PropTypes.string.isRequired,
+	value: _react2["default"].PropTypes.string.isRequired
+});
 
-exports.elementOrArrayOfElement = elementOrArrayOfElement;
-/**
- * A string or an object,
- * example: {key: "somekey", value: "somevalue"}.
- */
-var stringOrKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string,
-	value: _react2["default"].PropTypes.string
-})]);
+exports.keyValueMap = keyValueMap;
+// ARRAY OF
 
-exports.stringOrKeyValue = stringOrKeyValue;
+var arrayOfKeyValueMaps = _react2["default"].PropTypes.arrayOf(keyValueMap);
+
+exports.arrayOfKeyValueMaps = arrayOfKeyValueMaps;
+var arrayOfStrings = _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string);
+
+exports.arrayOfStrings = arrayOfStrings;
+var arrayOfElements = _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.element);
+
+exports.arrayOfElements = arrayOfElements;
+// OR
+
 var stringOrArray = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.array]);
 
 exports.stringOrArray = stringOrArray;
-var stringOrArrayOfString = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string)]);
+var stringOrKeyValueMap = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, keyValueMap]);
 
-exports.stringOrArrayOfString = stringOrArrayOfString;
-var arrayOfKeyValue = _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string.isRequired,
-	value: _react2["default"].PropTypes.string.isRequired
-}));
+exports.stringOrKeyValueMap = stringOrKeyValueMap;
+var stringOrArrayOfStrings = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, arrayOfStrings]);
 
-exports.arrayOfKeyValue = arrayOfKeyValue;
-/**
- * An array of strings or an array of key/value objects,
- * example: [{key: "somekey", value: "somevalue"}].
- */
-var arrayOfStringOrArrayOfKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string), _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string,
-	value: _react2["default"].PropTypes.string
-}))]);
-exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
+exports.stringOrArrayOfStrings = stringOrArrayOfStrings;
+var elementOrArrayOfElement = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.element, arrayOfElements]);
+
+exports.elementOrArrayOfElement = elementOrArrayOfElement;
+var arrayOfStringsOrArrayOfKeyValueMaps = _react2["default"].PropTypes.oneOfType([arrayOfStrings, arrayOfKeyValueMaps]);
+
+exports.arrayOfStringsOrArrayOfKeyValueMaps = arrayOfStringsOrArrayOfKeyValueMaps;
+var keyValueMapOrArrayOfKeyValueMaps = _react2["default"].PropTypes.oneOfType([keyValueMap, arrayOfKeyValueMaps]);
+exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 
 },{"react":"react"}],2:[function(_dereq_,module,exports){
+
+/*
+ * @param {Array} list
+ * @returns {Boolean}
+ */
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var castArray = function castArray(array) {
-	return Array.isArray(array) ? array : [array];
-};
+exports.isListOfStrings = isListOfStrings;
+exports.isKeyValueMap = isKeyValueMap;
 exports.castArray = castArray;
+exports.castKeyValueArray = castKeyValueArray;
+
+function isListOfStrings(list) {
+	if (!Array.isArray(list) || !list.length) {
+		return false;
+	}
+
+	return list.every(function (item) {
+		return typeof item === "string";
+	});
+}
+
+/*
+ * @param {Object} map
+ * @returns {Boolean}
+ */
+
+function isKeyValueMap(map) {
+	if (map == null) {
+		return false;
+	}
+
+	return map.hasOwnProperty("key") && map.hasOwnProperty("value");
+}
+
+/*
+ * Always return an array.
+ *
+ * @param {String|Array} arr
+ * @returns {Array}
+ */
+
+function castArray(arr) {
+	return Array.isArray(arr) ? arr : [arr];
+}
+
+;
+
+/*
+ * Always return an array of key/value maps.
+ *
+ * @param {Number|String|Boolean|Array} list
+ * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
+ */
+
+function castKeyValueArray(list) {
+	list = castArray(list);
+
+	return list.map(function (item) {
+		return isKeyValueMap(item) ? item : {
+			key: item,
+			value: item
+		};
+	});
+}
 
 },{}],3:[function(_dereq_,module,exports){
 "use strict";
