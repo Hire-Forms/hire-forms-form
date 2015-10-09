@@ -1,4 +1,5 @@
 import React from "react";
+import cx from "classnames";
 
 import {stringOrArray} from "hire-forms-prop-types";
 import {castArray} from "hire-forms-utils";
@@ -25,12 +26,15 @@ export default (ComposedComponent, classNames=[]) => {
 
 		render() {
 			return (
-				<div className={"hire-forms-form " + castArray(classNames).join(" ")}>
+				<div className={cx(
+					"hire-forms-form",
+					classNames
+				)}>
 					<ComposedComponent
 						{...this.props}
-						handleChange={this.handleChange}
-						handleDelete={this.handleDelete}
-						handleInvalid={this.handleInvalid} />
+						handleChange={this.handleChange.bind(this)}
+						handleDelete={this.handleDelete.bind(this)}
+						handleInvalid={this.handleInvalid.bind(this)} />
 				</div>
 			);
 		}
