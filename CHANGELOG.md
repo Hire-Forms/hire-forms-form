@@ -1,3 +1,7 @@
+### v2.0.2	(2015/10/9 17:14)
+* Use classnames and bind this
+* New build
+
 ### v2.0.1	(2015/7/20 17:41)
 * Add custom classname parameter
 * Update README.md
